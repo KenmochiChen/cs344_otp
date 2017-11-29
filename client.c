@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 	plaintext[strlen(plaintext)+1]='\0';
 	int i;
 	for(i=0;i<strlen(plaintext);i++){
-		if(buffer[0] < 'A' || buffer[0] > 'Z'){
+		if(plaintext[0] < 'A' || plaintext[0] > 'Z'){
 			fprintf(stderr,"bad characters \n");
 			exit(1);
 		}
