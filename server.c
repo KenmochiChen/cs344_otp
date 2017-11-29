@@ -66,6 +66,7 @@ int main(int argc, char *argv[])
 
 					char response[] = "accept";
 					send(establishedConnectionFD, response, sizeof(accept)-1, 0);
+					printf("&&&&&&&&&&&&&&&&&&&&&&&\n");
 					
 			} 
 			else {
