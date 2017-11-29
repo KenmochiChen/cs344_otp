@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <ctime>
+#include <time.h>
 
 int main(int argc, char *argv[]){
 
