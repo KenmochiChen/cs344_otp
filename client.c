@@ -74,9 +74,10 @@ int main(int argc, char *argv[])
     	 exit(1);
     }
 
-	send(socketFD, plaintext, strlen(plaintext), 0);
+	strcat(plaintext,key);
+	send(socketFD, plaintext, strlen(plaintext)+strlen(key), 0);
 
-	send(socketFD, key, strlen(key), 0);
+	//send(socketFD, key, strlen(key), 0);
 
 	printf("============\n");
 

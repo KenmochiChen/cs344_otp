@@ -78,15 +78,18 @@ int main(int argc, char *argv[])
 			//printf("SERVER: I received this from the client: \"%s\"\n", buffer);
 			//memset(buffer, '\0', 256);
 			printf("+++++++++++++\n%s\n",buffer);
+			memset(buffer, '\0', 256);
 			charsRead = recv(establishedConnectionFD, buffer, 255, 0);
 			printf("-------------\n%s\n",buffer);
 
 			// Send a Success message back to the client
 			charsRead = send(establishedConnectionFD, "I am the server, and I got your message", 39, 0); // Send success back
 			if (charsRead < 0) error("ERROR writing to socket");
-			 // Close the existing socket which is connected to the client
-
+			// Close the existing socket which is connected to the client
 			
+			printf("$$$$$$$$$$$$$$$$$$$$$$$\n");
+
+
 
 
 
@@ -95,7 +98,7 @@ int main(int argc, char *argv[])
 		close(establishedConnectionFD);
 
 
-		while (pid > 0){ 	//parent process. wait for children to finish
+		if (pid > 0){ 	//parent process. wait for children to finish
 			pid = waitpid(-1, &status, WNOHANG);
 		}
 
