@@ -76,6 +76,7 @@ int main(int argc, char *argv[])
 			}
 			//printf("SERVER: I received this from the client: \"%s\"\n", buffer);
 			memset(buffer, '\0', 256);
+			printf("+++++++++++++\n%s\n",buffer);
 			charsRead = recv(establishedConnectionFD, buffer, 255, 0);
 			printf("-------------\n%s\n",buffer);
 
@@ -84,7 +85,7 @@ int main(int argc, char *argv[])
 			if (charsRead < 0) error("ERROR writing to socket");
 			 // Close the existing socket which is connected to the client
 
-
+			
 
 
 

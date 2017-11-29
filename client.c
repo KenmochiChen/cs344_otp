@@ -64,6 +64,9 @@ int main(int argc, char *argv[])
 	key[strlen(key)]='\n';
 	key[strlen(key)+1]='\0';
 
+	printf("client:%s\n",plaintext);
+	printf("client:%s\n",key);
+
 	if (strlen(plaintext) > strlen(key)){
     	 fprintf(stderr, "key is too short"); 
     	 exit(1);
@@ -73,12 +76,15 @@ int main(int argc, char *argv[])
 
 	send(socketFD, key, strlen(key), 0);
 
+	printf("============\n");
+
 
 
 
 	
 	memset(buffer, '\0', sizeof(buffer));
 	charsRead = recv(socketFD, buffer, sizeof(buffer) - 1, 0);
+	printf("^^^^^^^^^^^^^^\n");
 	if (charsRead < 0) error("ERROR reading from socket");
 	printf("%s\n",buffer);
 
