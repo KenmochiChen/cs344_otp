@@ -7,51 +7,81 @@
 #include <netinet/in.h>
 #include <netdb.h> 
 
-void error(const char *msg) { perror(msg); exit(0); } // Error function used for reporting issues
+void error(const char *msg) { perror(msg); exit(0); }
 
 int main(int argc, char *argv[])
 {
-	int socketFD, portNumber, charsWritten, charsRead;
+	int socketFD, portNumber, charsRead;
 	struct sockaddr_in serverAddress;
 	struct hostent* serverHostInfo;
 	char buffer[256];
+	char auth_message[50]="verification";
     
-	if (argc < 3) { fprintf(stderr,"USAGE: %s hostname port\n", argv[0]); exit(0); } // Check usage & args
+	if (argc < 4) { fprintf(stderr,"USAGE: %s hostname port\n", argv[0]); exit(0); }
 
-	// Set up the server address struct
-	memset((char*)&serverAddress, '\0', sizeof(serverAddress)); // Clear out the address struct
-	portNumber = atoi(argv[2]); // Get the port number, convert to an integer from a string
-	serverAddress.sin_family = AF_INET; // Create a network-capable socket
-	serverAddress.sin_port = htons(portNumber); // Store the port number
-	serverHostInfo = gethostbyname(argv[1]); // Convert the machine name into a special form of address
+	memset((char*)&serverAddress, '\0', sizeof(serverAddress));
+	portNumber = atoi(argv[3]);
+	serverAddress.sin_family = AF_INET; 
+	serverAddress.sin_port = htons(portNumber);
+	serverHostInfo = gethostbyname("localhost"); 
 	if (serverHostInfo == NULL) { fprintf(stderr, "CLIENT: ERROR, no such host\n"); exit(0); }
-	memcpy((char*)&serverAddress.sin_addr.s_addr, (char*)serverHostInfo->h_addr, serverHostInfo->h_length); // Copy in the address
+	memcpy((char*)&serverAddress.sin_addr.s_addr, (char*)serverHostInfo->h_addr, serverHostInfo->h_length);
 
-	// Set up the socket
-	socketFD = socket(AF_INET, SOCK_STREAM, 0); // Create the socket
+
+	socketFD = socket(AF_INET, SOCK_STREAM, 0);
 	if (socketFD < 0) error("CLIENT: ERROR opening socket");
 	
-	// Connect to server
-	if (connect(socketFD, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) < 0) // Connect socket to address
+
+	if (connect(socketFD, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) < 0)
 		error("CLIENT: ERROR connecting");
 
-	// Get input message from user
-	printf("CLIENT: Enter text to send to the server, and then hit enter: ");
-	memset(buffer, '\0', sizeof(buffer)); // Clear out the buffer array
-	fgets(buffer, sizeof(buffer) - 1, stdin); // Get input from the user, trunc to buffer - 1 chars, leaving \0
-	buffer[strcspn(buffer, "\n")] = '\0'; // Remove the trailing \n that fgets adds
+	memset(buffer, '\0', sizeof(buffer));
+	
 
-	// Send message to server
-	charsWritten = send(socketFD, buffer, strlen(buffer), 0); // Write to the server
-	if (charsWritten < 0) error("CLIENT: ERROR writing to socket");
-	if (charsWritten < strlen(buffer)) printf("CLIENT: WARNING: Not all data written to socket!\n");
+	send(socketFD, auth_message, strlen(auth_message), 0);
+	recv(socketFD, auth_message, strlen(auth_message), 0);
+	if (strcmp(buffer, "accept") != 0) {
+        fprintf(stderr,"fial to contact otp_enc_d\n");
+        exit(2);
+    }
 
-	// Get return message from server
-	memset(buffer, '\0', sizeof(buffer)); // Clear out the buffer again for reuse
-	charsRead = recv(socketFD, buffer, sizeof(buffer) - 1, 0); // Read data from the socket, leaving \0 at end
-	if (charsRead < 0) error("CLIENT: ERROR reading from socket");
-	printf("CLIENT: I received this from the server: \"%s\"\n", buffer);
+	char plaintext[1000];
+	FILE *plaintext_fp = fopen(argv[1], "r");
+	fgets(plaintext,1000,plaintext_fp);
+	plaintext[strlen(plaintext)]='\n';
+	plaintext[strlen(plaintext)+1]='\0';
+	int i;
+	for(i=0;i<strlen(plaintext);i++){
+		if(buffer[0] < 'A' || buffer[0] > 'Z'){
+			fprintf(stderr,"bad characters \n");
+			exit(1);
+		}
+	}
 
-	close(socketFD); // Close the socket
+	char key[1000];
+	FILE *key_fp = fopen(argv[2], "r");
+	fgets(key,1000,key_fp);
+	key[strlen(key)]='\n';
+	key[strlen(key)+1]='\0';
+
+	if (strlen(plaintext) > strlen(key)){
+    	 fprintf(stderr, "key is too short"); 
+    	 exit(1);
+    }
+
+	send(socketFD, plaintext, strlen(plaintext), 0);
+
+	send(socketFD, key, strlen(key), 0);
+
+
+
+
+	
+	memset(buffer, '\0', sizeof(buffer));
+	charsRead = recv(socketFD, buffer, sizeof(buffer) - 1, 0);
+	if (charsRead < 0) error("ERROR reading from socket");
+	printf("%s\n",buffer);
+
+	close(socketFD);
 	return 0;
 }
