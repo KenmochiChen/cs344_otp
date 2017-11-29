@@ -65,18 +65,18 @@ int main(int argc, char *argv[])
 
 
 					char response[] = "accept";
-					send(establishedConnectionFD, response, sizeof(accept)-1, 0);
+					send(establishedConnectionFD, response, sizeof(response)-1, 0);
 					printf("&&&&&&&&&&&&&&&&&&&&&&&\n");
 					
 			} 
 			else {
 					//write confirmation back to client
 					char response[]  = "invalid";
-					send(establishedConnectionFD, response, sizeof(accept)-1, 0);
+					send(establishedConnectionFD, response, sizeof(response)-1, 0);
 					exit(2);
 			}
 			//printf("SERVER: I received this from the client: \"%s\"\n", buffer);
-			memset(buffer, '\0', 256);
+			//memset(buffer, '\0', 256);
 			printf("+++++++++++++\n%s\n",buffer);
 			charsRead = recv(establishedConnectionFD, buffer, 255, 0);
 			printf("-------------\n%s\n",buffer);

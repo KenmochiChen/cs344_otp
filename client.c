@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 
 	send(socketFD, auth_message, strlen(auth_message), 0);
 	printf("****************\n");
-	recv(socketFD, buffer, strlen(buffer), 0);
+	recv(socketFD, buffer, sizeof(buffer), 0);
 	printf("****************2\n");
 	if (strcmp(buffer, "accept") != 0) {
         fprintf(stderr,"fial to contact otp_enc_d\n");
