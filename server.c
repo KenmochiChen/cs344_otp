@@ -52,34 +52,45 @@ int main(int argc, char *argv[])
 			exit(1);
 		}
 
-		// Get the message from the client and display it
-		memset(buffer, '\0', 256);
-		charsRead = recv(establishedConnectionFD, buffer, 255, 0); // Read the client's message from the socket
-		if (charsRead < 0) error("ERROR reading from socket");
-		if (strcmp(buffer, "verification") == 0) {
-				//fprintf(stderr,"invalid client\n");
-				//write error back to client
+		if (pid == 0){
 
 
-				char response[] = "accept";
-				send(establishedConnectionFD, response, sizeof(accept)-1, 0);
-				
-		} 
-		else {
-				//write confirmation back to client
-				char response[]  = "invalid";
-				send(establishedConnectionFD, response, sizeof(accept)-1, 0);
-				exit(2);
+			// Get the message from the client and display it
+			memset(buffer, '\0', 256);
+			charsRead = recv(establishedConnectionFD, buffer, 255, 0); // Read the client's message from the socket
+			if (charsRead < 0) error("ERROR reading from socket");
+			if (strcmp(buffer, "verification") == 0) {
+					//fprintf(stderr,"invalid client\n");
+					//write error back to client
+
+
+					char response[] = "accept";
+					send(establishedConnectionFD, response, sizeof(accept)-1, 0);
+					
+			} 
+			else {
+					//write confirmation back to client
+					char response[]  = "invalid";
+					send(establishedConnectionFD, response, sizeof(accept)-1, 0);
+					exit(2);
+			}
+			//printf("SERVER: I received this from the client: \"%s\"\n", buffer);
+			memset(buffer, '\0', 256);
+			charsRead = recv(establishedConnectionFD, buffer, 255, 0);
+			printf("-------------\n%s\n",buffer);
+
+			// Send a Success message back to the client
+			charsRead = send(establishedConnectionFD, "I am the server, and I got your message", 39, 0); // Send success back
+			if (charsRead < 0) error("ERROR writing to socket");
+			 // Close the existing socket which is connected to the client
+
+
+
+
+
 		}
-		//printf("SERVER: I received this from the client: \"%s\"\n", buffer);
 
-		charsRead = recv(establishedConnectionFD, buffer, 255, 0);
-		printf("-------------\n%s\n",buffer);
-
-		// Send a Success message back to the client
-		charsRead = send(establishedConnectionFD, "I am the server, and I got your message", 39, 0); // Send success back
-		if (charsRead < 0) error("ERROR writing to socket");
-		close(establishedConnectionFD); // Close the existing socket which is connected to the client
+		close(establishedConnectionFD);
 
 
 		while (pid > 0){ 	//parent process. wait for children to finish
