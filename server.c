@@ -86,6 +86,31 @@ int main(int argc, char *argv[])
 			memset(buffer, '\0', 256);
 			charsRead = recv(establishedConnectionFD, buffer, 255, 0);
 			printf("-------------\n%s\n",buffer);
+			int i,p;
+			char plaintext[1000]="\0";
+			char key[1000]="\0";
+			for(i=0;i<strlen(buffer);i++){
+				if(buffer[i] != '\n'){
+					plaintext[i]=buffer[i];
+				}else{
+					plaintext[i+1]='\0';
+					break;
+				}
+			}
+			p=i;
+			for(i=0;i<strlen(buffer);i++){
+				if(buffer[p+i] != '\n'){
+					key[i]=buffer[p+i];
+				}else{
+					key[i+1]='\0';
+					break;
+				}
+			}
+
+			printf("plaintext:%s ************\n",plaintext);
+			printf("key:%s *********\n",key);
+
+
 
 			// Send a Success message back to the client
 			charsRead = send(establishedConnectionFD, "I am the server, and I got your message", 39, 0); // Send success back
