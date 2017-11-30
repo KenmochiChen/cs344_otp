@@ -32,7 +32,7 @@ int main(int argc, char *argv[]){
         temp_key[1]='\0';
         strcat(key,temp_key);
     }
-    key[keygen_len]='\n';
-    key[keygen_len+1]='\0';
+    key[keygen_len]='\0';
+    //key[keygen_len+1]='\0';
     printf("%s\n",key);
 }
