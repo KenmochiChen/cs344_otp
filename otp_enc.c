@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 	int socketFD, portNumber, charsRead;
 	struct sockaddr_in serverAddress;
 	struct hostent* serverHostInfo;
-	char buffer[256];
+	char buffer[10000];
 	char auth_message[50]="verification";
     
 	if (argc < 4) { fprintf(stderr,"USAGE: %s hostname port\n", argv[0]); exit(0); }
