@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
 	charsRead = recv(socketFD, buffer, sizeof(buffer) - 1, 0);
 	printf("^^^^^^^^^^^^^^\n");
 	if (charsRead < 0) error("ERROR reading from socket");
-	printf("%s\n",buffer);
+	printf("client:%s\n",buffer);
 
 	close(socketFD);
 	return 0;

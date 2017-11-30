@@ -149,8 +149,12 @@ int main(int argc, char *argv[])
 			printf("plaintext:%s\n",plaintext);
 			printf("key:%s\n",key);
 
+
+
 			char ciphertext[1000]="\0";
 			enc(plaintext,key,ciphertext);
+
+			printf("server:%s\n",ciphertext);
 
 
 
