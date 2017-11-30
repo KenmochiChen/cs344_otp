@@ -8,7 +8,7 @@ int main(int argc, char *argv[]){
 
     int keygen_len=0;
 
-    if(argc>2){
+    if(argc != 2){
         perror("argument wrong\n");
         exit(1);
     }
@@ -19,14 +19,14 @@ int main(int argc, char *argv[]){
 
     int i;
     int temp_num;
-    char key[1000]="\0";
+    char key[10000]="\0";
     char temp_key[3]="\0";
     for(i=0;i<keygen_len;i++){
         temp_num=rand()%27;
         if(temp_num==26){
             strcpy(temp_key," ");
             strcat(key,temp_key);
-            break;
+            continue;
         }
         sprintf(temp_key,"%c",temp_num+65);
         temp_key[1]='\0';
