@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 	printf("client:%s\n",plaintext);
 	printf("client:%s\n",key);
 
-	if (strlen(plaintext) > strlen(key)){
+	if (strlen(plaintext) > (strlen(key)+1)){
     	 fprintf(stderr, "key is too short"); 
     	 exit(1);
     }
