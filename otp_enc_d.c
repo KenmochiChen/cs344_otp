@@ -114,6 +114,7 @@ int main(int argc, char *argv[])
 			memset(buffer, '\0', 10000);
 			charsRead = recv(establishedConnectionFD, buffer, strlen(buffer), 0); // Read the client's message from the socket
 			if (charsRead < 0) error("ERROR reading from socket");
+            printf("server:%s\n",buffer);
 			if (strcmp(buffer, "verification") == 0) {
 					//fprintf(stderr,"invalid client\n");
 					//write error back to client

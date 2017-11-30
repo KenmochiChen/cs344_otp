@@ -48,14 +48,15 @@ int main(int argc, char *argv[])
 	printf("****************\n");
 	recv(socketFD, buffer, sizeof(buffer), 0);
 	printf("****************2\n");
+    printf("client:%s\n",buffer);
 	if (strcmp(buffer, "accept") != 0) {
         fprintf(stderr,"fial to contact otp_enc_d\n");
         exit(2);
     }
 
-	char plaintext[1000];
+	char plaintext[10000];
 	FILE *plaintext_fp = fopen(argv[1], "r");
-	fgets(plaintext,1000,plaintext_fp);
+	fgets(plaintext,10000,plaintext_fp);
 	plaintext[strlen(plaintext)]='\0';
 	//plaintext[strlen(plaintext)+1]='\0';
 	int i;
@@ -66,9 +67,9 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	char key[1000];
+	char key[10000];
 	FILE *key_fp = fopen(argv[2], "r");
-	fgets(key,1000,key_fp);
+	fgets(key,10000,key_fp);
 	key[strlen(key)-1]='\0';
 	//key[strlen(key)+1]='\0';
 
