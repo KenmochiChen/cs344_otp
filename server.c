@@ -53,11 +53,7 @@ void enc(char plaintext[], char key[], char ciphertext_return[]){
             strcpy(temp_ciphertext," ");
         else sprintf(temp_ciphertext,"%c",temp_num+65);
 
-		printf("enc:%s------------\n",temp_ciphertext);
-
-		printf("CHAR INT         temp_ciphertext -enc\n"); 
-		for (x = 0; x < strlen(temp_ciphertext); x++) 
-			printf(" %c   %d\n", temp_ciphertext[x], temp_ciphertext[x]);
+		
 
         strcat(ciphertext,temp_ciphertext);
         
@@ -65,6 +61,14 @@ void enc(char plaintext[], char key[], char ciphertext_return[]){
     }
     ciphertext[i]='\0';
     strcpy(ciphertext_return,ciphertext);
+
+	printf("enc:%s------------\n",temp_ciphertext);
+
+	printf("CHAR INT         temp_ciphertext -enc\n"); 
+	for (x = 0; x < strlen(temp_ciphertext); x++) 
+		printf(" %c   %d\n", temp_ciphertext[x], temp_ciphertext[x]);
+
+
 }
 
 
