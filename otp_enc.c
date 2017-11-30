@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 
 	send(socketFD, auth_message, strlen(auth_message), 0);
 	printf("****************\n");
-	recv(socketFD, buffer, sizeof(buffer), 0);
+	recv(socketFD, buffer, 9999, 0);
 	printf("****************2\n");
     printf("client:%s\n",buffer);
 	if (strcmp(buffer, "accept") != 0) {
@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
 
 	
 	memset(buffer, '\0', sizeof(buffer));
-	charsRead = recv(socketFD, buffer, sizeof(buffer) - 1, 0);
+	charsRead = recv(socketFD, buffer, 9999, 0);
 	printf("^^^^^^^^^^^^^^\n");
 	if (charsRead < 0) error("ERROR reading from socket");
 	printf("client:%s\n",buffer);
