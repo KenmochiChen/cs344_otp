@@ -155,7 +155,7 @@ int main(int argc, char *argv[])
 			for (x = 0; x < strlen(plaintext); x++) 
 				printf(" %c   %d\n", plaintext[x], plaintext[x]);
 
-			int x = 0; 
+
 			printf("CHAR INT         key\n"); 
 			for (x = 0; x < strlen(key); x++) 
 				printf(" %c   %d\n", key[x], key[x]);
