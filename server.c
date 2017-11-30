@@ -40,7 +40,8 @@ int main(int argc, char *argv[])
 	
 	while(1){
 
-		while (pid > 0){ 	//parent process. wait for children to finish
+		printf("pid:%d ---------------------\n");
+		if (pid > 0){ 	//parent process. wait for children to finish
 			printf("next?---------------------------\n");
 			pid = waitpid(-1, &status, WNOHANG);
 			printf(".");
