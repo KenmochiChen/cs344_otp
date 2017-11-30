@@ -29,11 +29,17 @@ int main(int argc, char *argv[])
 
 
 	socketFD = socket(AF_INET, SOCK_STREAM, 0);
-	if (socketFD < 0) error("CLIENT: ERROR opening socket");
+	if (socketFD < 0) {
+		perror("CLIENT: ERROR opening socket"); 
+		exit(2);
+	}
 	
 
-	if (connect(socketFD, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) < 0)
-		error("CLIENT: ERROR connecting");
+	if (connect(socketFD, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) < 0){
+		perror("CLIENT: ERROR connecting"); 
+		exit(2);
+	}
+
 
 	memset(buffer, '\0', sizeof(buffer));
 	

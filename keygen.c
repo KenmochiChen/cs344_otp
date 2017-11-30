@@ -13,7 +13,7 @@ int main(int argc, char *argv[]){
         exit(1);
     }
     keygen_len=atoi(argv[1]);
-    printf("%d\n",keygen_len);
+    //printf("%d\n",keygen_len);
 
     srand((unsigned)time(0));
 
