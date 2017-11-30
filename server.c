@@ -41,6 +41,7 @@ int main(int argc, char *argv[])
 	while(1){
 
 		while (pid > 0){ 	//parent process. wait for children to finish
+			printf("next?---------------------------\n");
 			pid = waitpid(-1, &status, WNOHANG);
 			printf(".");
 		}
@@ -59,7 +60,7 @@ int main(int argc, char *argv[])
 
 		if (pid == 0){
 
-
+			
 			// Get the message from the client and display it
 			memset(buffer, '\0', 256);
 			charsRead = recv(establishedConnectionFD, buffer, 255, 0); // Read the client's message from the socket
@@ -101,16 +102,16 @@ int main(int argc, char *argv[])
 
 
 		}
+		else{
+			close(establishedConnectionFD);
 
-		close(establishedConnectionFD);
 
-
-		while (pid > 0){ 	//parent process. wait for children to finish
-			pid = waitpid(-1, &status, WNOHANG);
-			printf(".");
+			while (pid > 0){ 	//parent process. wait for children to finish
+				printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+				pid = waitpid(-1, &status, WNOHANG);
+				printf(".");
+			}
 		}
-
-
 	}
 
 
