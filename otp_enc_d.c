@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
 			
 			// Get the message from the client and display it
 			memset(buffer, '\0', 10000);
-			charsRead = recv(establishedConnectionFD, buffer, 10000, 0); // Read the client's message from the socket
+			charsRead = recv(establishedConnectionFD, buffer, 9999, 0); // Read the client's message from the socket
 			if (charsRead < 0) error("ERROR reading from socket");
             printf("server:%s\n",buffer);
 			if (strcmp(buffer, "verification") == 0) {
