@@ -8,6 +8,45 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+void enc(char plaintext[], char key[], char ciphertext_return[]){
+    char ciphertext[1000];
+    int i,plaintext_num,key_num,temp_num;
+    char temp_num_string[3],temp_ciphertext[3];
+    for(i=0;i<strlen(plaintext);i++){
+        if(plaintext[i]==' '){
+            plaintext_num=27;
+        }
+        else{
+            sprintf(temp_num_string,"%d",plaintext[i]);
+            plaintext_num=atoi(temp_num_string)-65;
+        }
+
+        if(key[i]==' '){
+            key_num=27;
+        }
+        else{
+            sprintf(temp_num_string,"%d",key[i]);
+            key_num=atoi(temp_num_string)-65;
+        }
+        
+        temp_num=plaintext_num+key_num;
+        temp_num=temp_num%27;
+        if(temp_num<0)
+            temp_num=temp_num+27;
+        if(temp_num==26)
+            strcpy(temp_ciphertext," ");
+        else sprintf(temp_ciphertext,"%c",temp_num+65);
+
+        strcat(ciphertext,temp_ciphertext);
+        
+        
+    }
+    ciphertext[i]='\0';
+    strcpy(ciphertext_return,ciphertext);
+}
+
+
 void error(const char *msg) { perror(msg); exit(1); } // Error function used for reporting issues
 
 int main(int argc, char *argv[])
@@ -110,10 +149,13 @@ int main(int argc, char *argv[])
 			printf("plaintext:%s\n",plaintext);
 			printf("key:%s\n",key);
 
+			char ciphertext[1000]='\0';
+			enc(plaintext,key,ciphertext);
+
 
 
 			// Send a Success message back to the client
-			charsRead = send(establishedConnectionFD, "I am the server, and I got your message", 39, 0); // Send success back
+			charsRead = send(establishedConnectionFD, ciphertext, strlen(ciphertext) 0); // Send success back
 			if (charsRead < 0) error("ERROR writing to socket");
 			// Close the existing socket which is connected to the client
 			
