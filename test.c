@@ -79,7 +79,7 @@ void dec(char plaintext[], char key[], char ciphertext_return[]){
 int main(int argc, char *argv[]){
 
     char ciphertext[1000];
-    dec(argv[1],argv[2],ciphertext);
+    enc(argv[1],argv[2],ciphertext);
     printf("%s\n",ciphertext);
 
 }

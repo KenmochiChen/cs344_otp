@@ -55,7 +55,8 @@ void enc(char plaintext[], char key[], char ciphertext_return[]){
 
 		
 
-        strcat(ciphertext,temp_ciphertext);
+        //strcat(ciphertext,temp_ciphertext);
+		ciphertext[i]=temp_ciphertext[0];
         
         
     }
