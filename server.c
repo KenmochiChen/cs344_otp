@@ -13,7 +13,7 @@ void error(const char *msg) { perror(msg); exit(1); } // Error function used for
 int main(int argc, char *argv[])
 {
 	int listenSocketFD, establishedConnectionFD, portNumber, charsRead, status;
-	socklen_t sizeOfClientInfo;
+	socklen_t sizeOfClientIn	fo;
 	char buffer[256];
 	struct sockaddr_in serverAddress, clientAddress;
 	pid_t pid, sid;

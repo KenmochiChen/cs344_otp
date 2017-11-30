@@ -63,8 +63,8 @@ int main(int argc, char *argv[])
 	char key[1000];
 	FILE *key_fp = fopen(argv[2], "r");
 	fgets(key,1000,key_fp);
-	key[strlen(key)]='\n';
-	key[strlen(key)+1]='\0';
+	key[strlen(key)]='\0';
+	//key[strlen(key)+1]='\0';
 
 	printf("client:%s\n",plaintext);
 	printf("client:%s\n",key);
