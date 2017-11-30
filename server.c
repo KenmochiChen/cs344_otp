@@ -149,13 +149,13 @@ int main(int argc, char *argv[])
 			printf("plaintext:%s\n",plaintext);
 			printf("key:%s\n",key);
 
-			char ciphertext[1000]='\0';
+			char ciphertext[1000]="\0";
 			enc(plaintext,key,ciphertext);
 
 
 
 			// Send a Success message back to the client
-			charsRead = send(establishedConnectionFD, ciphertext, strlen(ciphertext) 0); // Send success back
+			charsRead = send(establishedConnectionFD, ciphertext, strlen(ciphertext), 0); // Send success back
 			if (charsRead < 0) error("ERROR writing to socket");
 			// Close the existing socket which is connected to the client
 			
