@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
 					break;
 				}
 			}
-			p=i;
+			p=i+1;
 			for(i=0;i<strlen(buffer);i++){
 				if(buffer[p+i] != '\n'){
 					key[i]=buffer[p+i];
@@ -107,8 +107,8 @@ int main(int argc, char *argv[])
 				}
 			}
 
-			printf("plaintext:%s ************\n",plaintext);
-			printf("key:%s *********\n",key);
+			printf("plaintext:%s\n",plaintext);
+			printf("key:%s\n",key);
 
 
 
