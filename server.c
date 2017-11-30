@@ -89,6 +89,8 @@ int main(int argc, char *argv[])
 			
 			printf("$$$$$$$$$$$$$$$$$$$$$$$\n");
 
+			return 0;
+
 
 
 
@@ -98,15 +100,12 @@ int main(int argc, char *argv[])
 		close(establishedConnectionFD);
 
 
-		if (pid > 0){ 	//parent process. wait for children to finish
+		while (pid > 0){ 	//parent process. wait for children to finish
 			pid = waitpid(-1, &status, WNOHANG);
 		}
 
 
 	}
-	
-
-
 
 
 

@@ -50,8 +50,8 @@ int main(int argc, char *argv[])
 	char plaintext[1000];
 	FILE *plaintext_fp = fopen(argv[1], "r");
 	fgets(plaintext,1000,plaintext_fp);
-	plaintext[strlen(plaintext)]='\n';
-	plaintext[strlen(plaintext)+1]='\0';
+	plaintext[strlen(plaintext)]='\0';
+	//plaintext[strlen(plaintext)+1]='\0';
 	int i;
 	for(i=0;i<strlen(plaintext);i++){
 		if(plaintext[0] < 'A' || plaintext[0] > 'Z'){
@@ -75,8 +75,9 @@ int main(int argc, char *argv[])
     }
 
 	strcat(plaintext,key);
+	printf("client:%s\n",plaintext);
 	send(socketFD, plaintext, strlen(plaintext)+strlen(key), 0);
-
+	
 	//send(socketFD, key, strlen(key), 0);
 
 	printf("============\n");
