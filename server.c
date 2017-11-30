@@ -13,18 +13,6 @@ void enc(char plaintext[], char key[], char ciphertext_return[]){
 
 
 
-	int x = 0; 
-	printf("CHAR INT         plaintext -enc\n"); 
-	for (x = 0; x < strlen(plaintext); x++) 
-		printf(" %c   %d\n", plaintext[x], plaintext[x]);
-
-
-	printf("CHAR INT         key -enc\n"); 
-	for (x = 0; x < strlen(key); x++) 
-		printf(" %c   %d\n", key[x], key[x]);
-
-
-
     char ciphertext[1000];
     int i,plaintext_num,key_num,temp_num;
     char temp_num_string[3],temp_ciphertext[3];
@@ -63,11 +51,8 @@ void enc(char plaintext[], char key[], char ciphertext_return[]){
     ciphertext[i]='\0';
     strcpy(ciphertext_return,ciphertext);
 
-	printf("enc:%s------------\n",temp_ciphertext);
+	printf("enc:%s------------\n",ciphertext);
 
-	printf("CHAR INT         temp_ciphertext -enc\n"); 
-	for (x = 0; x < strlen(temp_ciphertext); x++) 
-		printf(" %c   %d\n", temp_ciphertext[x], temp_ciphertext[x]);
 
 
 }
