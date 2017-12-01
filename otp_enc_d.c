@@ -157,8 +157,8 @@ int main(int argc, char *argv[])
 				}
 			}
 
-			//printf("plaintext:%s\n",plaintext);
-			//printf("key:%s\n",key);
+			printf("server plaintext:%s\n",plaintext);
+			printf("server key:%s\n",key);
 
 			
 			// int x = 0; 
