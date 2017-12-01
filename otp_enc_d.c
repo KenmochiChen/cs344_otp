@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define LENGTH 512
+#define LENGTH 5
 
 
 void enc(char plaintext[], char key[], char ciphertext_return[]){

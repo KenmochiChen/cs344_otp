@@ -7,7 +7,7 @@
 #include <netinet/in.h>
 #include <netdb.h> 
 
-#define LENGTH 512
+#define LENGTH 5
 
 void error(const char *msg) { perror(msg); exit(0); }
 
