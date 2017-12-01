@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 	int socketFD, portNumber, charsRead;
 	struct sockaddr_in serverAddress;
 	struct hostent* serverHostInfo;
-	char buffer[1000];
+	char buffer[160000];
 	char auth_message[50]="verification";
     
 	if (argc < 4) { fprintf(stderr,"USAGE: %s hostname port\n", argv[0]); exit(0); }
@@ -56,9 +56,9 @@ int main(int argc, char *argv[])
         exit(2);
     }
 
-	char plaintext[1000];
+	char plaintext[80000];
 	FILE *plaintext_fp = fopen(argv[1], "r");
-	fgets(plaintext,1000,plaintext_fp);
+	fgets(plaintext,80000,plaintext_fp);
 	plaintext[strlen(plaintext)]='\0';
 	//plaintext[strlen(plaintext)+1]='\0';
 	int i;
@@ -69,9 +69,9 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	char key[1000];
+	char key[80000];
 	FILE *key_fp = fopen(argv[2], "r");
-	fgets(key,1000,key_fp);
+	fgets(key,80000,key_fp);
 	key[strlen(key)-1]='\0';
 	//key[strlen(key)+1]='\0';
 

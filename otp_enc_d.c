@@ -15,7 +15,7 @@ void enc(char plaintext[], char key[], char ciphertext_return[]){
 
 
 
-    char ciphertext[1000];
+    char ciphertext[80000];
     int i,plaintext_num,key_num,temp_num;
     char temp_num_string[3],temp_ciphertext[3];
     for(i=0;i<strlen(plaintext);i++){
@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 {
 	int listenSocketFD, establishedConnectionFD, portNumber, charsRead, status;
 	socklen_t sizeOfClientInfo;
-	char buffer[1000];
+	char buffer[160000];
 	struct sockaddr_in serverAddress, clientAddress;
 	pid_t pid, sid;
 
@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
 
 			
 			// Get the message from the client and display it
-			memset(buffer, '\0', 1000);
+			memset(buffer, '\0', 80000);
 			charsRead = recv(establishedConnectionFD, buffer, 9999, 0); // Read the client's message from the socket
 			if (charsRead < 0) error("ERROR reading from socket");
             //printf("server:%s\n",buffer);
@@ -136,7 +136,7 @@ int main(int argc, char *argv[])
 			//memset(buffer, '\0', 100);
 			//printf("+++++++++++++\n%s\n",buffer);
 
-			memset(buffer, '\0', 1000);
+			memset(buffer, '\0', 80000);
 			char receive_buffer[LENGTH+1]="\0";
 			int bytes_received = 0;
 			while ((bytes_received = recv(establishedConnectionFD, receive_buffer, LENGTH, 0)) > 0){
@@ -167,8 +167,8 @@ int main(int argc, char *argv[])
 
 
 			int i,p;
-			char plaintext[1000]="\0";
-			char key[1000]="\0";
+			char plaintext[80000]="\0";
+			char key[80000]="\0";
 			for(i=0;i<strlen(buffer);i++){
 				if(buffer[i] != '\n'){
 					plaintext[i]=buffer[i];
@@ -203,7 +203,7 @@ int main(int argc, char *argv[])
 
 
 
-			char ciphertext[1000]="\0";
+			char ciphertext[80000]="\0";
 			enc(plaintext,key,ciphertext);
 
 			//printf("server:%s\n",ciphertext);
