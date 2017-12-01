@@ -7,7 +7,7 @@
 #include <netinet/in.h>
 #include <netdb.h> 
 
-#define LENGTH 5
+#define LENGTH 512
 
 void error(const char *msg) { perror(msg); exit(0); }
 
@@ -117,9 +117,34 @@ int main(int argc, char *argv[])
 
 	
 	memset(buffer, '\0', sizeof(buffer));
-	charsRead = recv(socketFD, buffer, 9999, 0);
+
+
+
+
+
+
+	memset(buffer, '\0', 80000);
+	char receive_buffer[LENGTH+1]="\0";
+	int bytes_received = 0;
+	while ((bytes_received = recv(socketFD, receive_buffer, LENGTH, 0)) > 0){
+		strcat(buffer,receive_buffer);
+		memset(receive_buffer, '\0', strlen(receive_buffer));
+
+		if (bytes_received == 0 || bytes_received != LENGTH)
+		{
+			break;
+		}
+	}
+
+
+
+
+
+
+
+	//charsRead = recv(socketFD, buffer, 9999, 0);
 	//printf("^^^^^^^^^^^^^^\n");
-	if (charsRead < 0) error("ERROR reading from socket");
+	//if (charsRead < 0) error("ERROR reading from socket");
 	printf("client:%s\n",buffer);
 
 	close(socketFD);
