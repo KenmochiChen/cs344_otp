@@ -43,7 +43,7 @@ void enc(char plaintext[], char key[], char ciphertext_return[]){
 
 		
 
-        //strcat(ciphertext,temp_ciphertext);
+        
 		ciphertext[i]=temp_ciphertext[0];
         
         
@@ -51,8 +51,7 @@ void enc(char plaintext[], char key[], char ciphertext_return[]){
     ciphertext[i]='\0';
     strcpy(ciphertext_return,ciphertext);
 
-	printf("enc:%s------------\n",ciphertext);
-
+	//printf("enc:%s------------\n",ciphertext);
 
 
 }
@@ -114,7 +113,7 @@ int main(int argc, char *argv[])
 			memset(buffer, '\0', 10000);
 			charsRead = recv(establishedConnectionFD, buffer, 9999, 0); // Read the client's message from the socket
 			if (charsRead < 0) error("ERROR reading from socket");
-            printf("server:%s\n",buffer);
+            //printf("server:%s\n",buffer);
 			if (strcmp(buffer, "verification") == 0) {
 					//fprintf(stderr,"invalid client\n");
 					//write error back to client
@@ -122,7 +121,7 @@ int main(int argc, char *argv[])
 
 					char response[] = "accept";
 					send(establishedConnectionFD, response, sizeof(response), 0);
-					printf("&&&&&&&&&&&&&&&&&&&&&&&\n");
+					//printf("&&&&&&&&&&&&&&&&&&&&&&&\n");
 					
 			} 
 			else {
@@ -133,10 +132,10 @@ int main(int argc, char *argv[])
 			}
 			//printf("SERVER: I received this from the client: \"%s\"\n", buffer);
 			//memset(buffer, '\0', 100);
-			printf("+++++++++++++\n%s\n",buffer);
+			//printf("+++++++++++++\n%s\n",buffer);
 			memset(buffer, '\0', 10000);
 			charsRead = recv(establishedConnectionFD, buffer, 9999, 0);
-			printf("-------------\n%s\n",buffer);
+			//printf("-------------\n%s\n",buffer);
 			int i,p;
 			char plaintext[10000]="\0";
 			char key[10000]="\0";
@@ -158,26 +157,26 @@ int main(int argc, char *argv[])
 				}
 			}
 
-			printf("plaintext:%s\n",plaintext);
-			printf("key:%s\n",key);
+			//printf("plaintext:%s\n",plaintext);
+			//printf("key:%s\n",key);
 
 			
-			int x = 0; 
-			printf("CHAR INT         plaintext\n"); 
-			for (x = 0; x < strlen(plaintext); x++) 
-				printf(" %c   %d\n", plaintext[x], plaintext[x]);
+			// int x = 0; 
+			// printf("CHAR INT         plaintext\n"); 
+			// for (x = 0; x < strlen(plaintext); x++) 
+			// 	printf(" %c   %d\n", plaintext[x], plaintext[x]);
 
 
-			printf("CHAR INT         key\n"); 
-			for (x = 0; x < strlen(key); x++) 
-				printf(" %c   %d\n", key[x], key[x]);
+			// printf("CHAR INT         key\n"); 
+			// for (x = 0; x < strlen(key); x++) 
+			// 	printf(" %c   %d\n", key[x], key[x]);
 
 
 
 			char ciphertext[10000]="\0";
 			enc(plaintext,key,ciphertext);
 
-			printf("server:%s\n",ciphertext);
+			//printf("server:%s\n",ciphertext);
 
 
 
@@ -186,7 +185,7 @@ int main(int argc, char *argv[])
 			if (charsRead < 0) error("ERROR writing to socket");
 			// Close the existing socket which is connected to the client
 			
-			printf("$$$$$$$$$$$$$$$$$$$$$$$\n");
+			//printf("$$$$$$$$$$$$$$$$$$$$$$$\n");
 
 			return 0;
 

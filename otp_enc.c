@@ -45,10 +45,10 @@ int main(int argc, char *argv[])
 	
 
 	send(socketFD, auth_message, strlen(auth_message), 0);
-	printf("****************\n");
+	//printf("****************\n");
 	recv(socketFD, buffer, 9999, 0);
-	printf("****************2\n");
-    printf("client:%s\n",buffer);
+	//printf("****************2\n");
+    //printf("client:%s\n",buffer);
 	if (strcmp(buffer, "accept") != 0) {
         fprintf(stderr,"fial to contact otp_enc_d\n");
         exit(2);
@@ -73,8 +73,8 @@ int main(int argc, char *argv[])
 	key[strlen(key)-1]='\0';
 	//key[strlen(key)+1]='\0';
 
-	printf("client:%s\n",plaintext);
-	printf("client:%s\n",key);
+	//printf("client:%s\n",plaintext);
+	//printf("client:%s\n",key);
 
 	if (strlen(plaintext) > (strlen(key)+1)){
     	 fprintf(stderr, "key is too short"); 
@@ -82,12 +82,12 @@ int main(int argc, char *argv[])
     }
 
 	strcat(plaintext,key);
-	printf("client:%s\n",plaintext);
+	//printf("client:%s\n",plaintext);
 	send(socketFD, plaintext, strlen(plaintext)+strlen(key), 0);
 	
 	//send(socketFD, key, strlen(key), 0);
 
-	printf("============\n");
+	//printf("============\n");
 
 
 
@@ -95,7 +95,7 @@ int main(int argc, char *argv[])
 	
 	memset(buffer, '\0', sizeof(buffer));
 	charsRead = recv(socketFD, buffer, 9999, 0);
-	printf("^^^^^^^^^^^^^^\n");
+	//printf("^^^^^^^^^^^^^^\n");
 	if (charsRead < 0) error("ERROR reading from socket");
 	printf("client:%s\n",buffer);
 
