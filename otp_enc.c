@@ -7,6 +7,8 @@
 #include <netinet/in.h>
 #include <netdb.h> 
 
+#define LENGTH 5
+
 void error(const char *msg) { perror(msg); exit(0); }
 
 int main(int argc, char *argv[])
@@ -14,7 +16,7 @@ int main(int argc, char *argv[])
 	int socketFD, portNumber, charsRead;
 	struct sockaddr_in serverAddress;
 	struct hostent* serverHostInfo;
-	char buffer[10000];
+	char buffer[1000];
 	char auth_message[50]="verification";
     
 	if (argc < 4) { fprintf(stderr,"USAGE: %s hostname port\n", argv[0]); exit(0); }
@@ -54,9 +56,9 @@ int main(int argc, char *argv[])
         exit(2);
     }
 
-	char plaintext[10000];
+	char plaintext[1000];
 	FILE *plaintext_fp = fopen(argv[1], "r");
-	fgets(plaintext,10000,plaintext_fp);
+	fgets(plaintext,1000,plaintext_fp);
 	plaintext[strlen(plaintext)]='\0';
 	//plaintext[strlen(plaintext)+1]='\0';
 	int i;
@@ -67,9 +69,9 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	char key[10000];
+	char key[1000];
 	FILE *key_fp = fopen(argv[2], "r");
-	fgets(key,10000,key_fp);
+	fgets(key,1000,key_fp);
 	key[strlen(key)-1]='\0';
 	//key[strlen(key)+1]='\0';
 
@@ -83,7 +85,28 @@ int main(int argc, char *argv[])
 
 	strcat(plaintext,key);
 	//printf("client:%s\n",plaintext);
-	send(socketFD, plaintext, strlen(plaintext)+strlen(key), 0);
+
+
+	char send_buffer[LENGTH+1]="\0";
+	for(i=0;i<strlen(plaintext);){
+		strncpy(send_buffer,plaintext+i,LENGTH);
+		i=i+5;
+		if (send(socketFD, send_buffer, strlen(send_buffer), 0) < 0)
+		{
+			printf("[otp_enc] Error: Failed to send file.\n");
+			break;
+		}
+		memset(send_buffer, '\0', strlen(send_buffer));
+	}
+
+
+
+
+
+
+
+
+	//send(socketFD, plaintext, strlen(plaintext), 0);
 	
 	//send(socketFD, key, strlen(key), 0);
 
