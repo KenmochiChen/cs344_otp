@@ -19,7 +19,7 @@ int main(int argc, char *argv[]){
 
     int i;
     int temp_num;
-    char key[10000]="\0";
+    char key[80000]="\0";
     char temp_key[3]="\0";
     for(i=0;i<keygen_len;i++){
         temp_num=rand()%27;
