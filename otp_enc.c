@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
 	//printf("client:%s\n",key);
 
 	if (strlen(plaintext) > (strlen(key)+1)){
-    	 fprintf(stderr, "key is too short"); 
+    	 fprintf(stderr, "key is too short\n"); 
     	 exit(1);
     }
 
@@ -146,8 +146,8 @@ int main(int argc, char *argv[])
 
 	//if (charsRead < 0) error("ERROR reading from socket");
 
-	//printf("client:%s\n",buffer);
-	printf("client:%d\n",strlen(buffer));
+	printf("%s\n",buffer);
+	//printf("client:%d\n",strlen(buffer));
 
 	close(socketFD);
 	return 0;
