@@ -213,16 +213,16 @@ int main(int argc, char *argv[])
 
 
 			char send_buffer[LENGTH+1]="\0";
-			for(i=0;i<strlen(ciphertext);){
-				strncpy(send_buffer,ciphertext+i,LENGTH);
-				i=i+5;
-				if (send(establishedConnectionFD, send_buffer, strlen(send_buffer), 0) < 0)
-				{
-					printf("[otp_enc] Error: Failed to send file.\n");
-					break;
-				}
-				memset(send_buffer, '\0', strlen(send_buffer));
-			}
+			// for(i=0;i<strlen(ciphertext);){
+			// 	strncpy(send_buffer,ciphertext+i,LENGTH);
+			// 	i=i+5;
+			// 	if (send(establishedConnectionFD, send_buffer, strlen(send_buffer), 0) < 0)
+			// 	{
+			// 		printf("[otp_enc] Error: Failed to send file.\n");
+			// 		break;
+			// 	}
+			// 	memset(send_buffer, '\0', strlen(send_buffer));
+			// }
 
 
 
@@ -234,8 +234,8 @@ int main(int argc, char *argv[])
 
 
 			// Send a Success message back to the client
-			//charsRead = send(establishedConnectionFD, ciphertext, strlen(ciphertext), 0); // Send success back
-			//if (charsRead < 0) error("ERROR writing to socket");
+			charsRead = send(establishedConnectionFD, ciphertext, strlen(ciphertext), 0); // Send success back
+			if (charsRead < 0) error("ERROR writing to socket");
 			// Close the existing socket which is connected to the client
 			
 			//printf("$$$$$$$$$$$$$$$$$$$$$$$\n");
