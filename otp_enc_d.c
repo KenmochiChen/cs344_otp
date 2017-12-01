@@ -197,11 +197,11 @@ int main(int argc, char *argv[])
 		else{
 			close(establishedConnectionFD);
 
-			printf("pid:%d-----------------\n",pid);
+			//printf("pid:%d-----------------\n",pid);
 			while (pid > 0){ 	//parent process. wait for children to finish
-				printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+				//printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
 				pid = waitpid(-1, &status, WNOHANG);
-				printf(".");
+				//printf(".");
 			}
 		}
 	}
