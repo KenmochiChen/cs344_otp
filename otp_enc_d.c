@@ -10,7 +10,7 @@
 
 #define LENGTH 5
 
-
+//enc string
 void enc(char plaintext[], char key[], char ciphertext_return[]){
 
 
@@ -52,9 +52,6 @@ void enc(char plaintext[], char key[], char ciphertext_return[]){
     }
     ciphertext[i]='\0';
     strcpy(ciphertext_return,ciphertext);
-
-	//printf("enc:%s------------\n",ciphertext);
-
 
 }
 
@@ -117,14 +114,10 @@ int main(int argc, char *argv[])
 			if (charsRead < 0) error("ERROR reading from socket");
             //printf("server:%s\n",buffer);
 			if (strcmp(buffer, "verification") == 0) {
-					//fprintf(stderr,"invalid client\n");
 					//write error back to client
-
 
 					char response[] = "accept";
 					send(establishedConnectionFD, response, sizeof(response), 0);
-					//printf("&&&&&&&&&&&&&&&&&&&&&&&\n");
-					
 			} 
 			else {
 					//write confirmation back to client
@@ -132,9 +125,6 @@ int main(int argc, char *argv[])
 					send(establishedConnectionFD, response, sizeof(response), 0);
 					exit(2);
 			}
-			//printf("SERVER: I received this from the client: \"%s\"\n", buffer);
-			//memset(buffer, '\0', 100);
-			//printf("+++++++++++++\n%s\n",buffer);
 
 			memset(buffer, '\0', 80000);
 			char receive_buffer[LENGTH+1]="\0";
@@ -148,23 +138,6 @@ int main(int argc, char *argv[])
 					break;
 				}
 			}
-
-
-
-
-
-
-
-
-
-
-
-			
-			//charsRead = recv(establishedConnectionFD, buffer, 9999, 0);
-			//printf("-------------\n%s\n",buffer);
-
-
-
 
 			int i,p;
 			char plaintext[80000]="\0";
@@ -187,30 +160,8 @@ int main(int argc, char *argv[])
 				}
 			}
 
-			//printf("server plaintext:%d\n",strlen(plaintext));
-			//printf("server key:%d\n",strlen(key));
-
-			
-			// int x = 0; 
-			// printf("CHAR INT         plaintext\n"); 
-			// for (x = 0; x < strlen(plaintext); x++) 
-			// 	printf(" %c   %d\n", plaintext[x], plaintext[x]);
-
-
-			// printf("CHAR INT         key\n"); 
-			// for (x = 0; x < strlen(key); x++) 
-			// 	printf(" %c   %d\n", key[x], key[x]);
-
-
-
 			char ciphertext[80000]="\0";
 			enc(plaintext,key,ciphertext);
-
-			//printf("server:%s\n",ciphertext);
-
-
-
-
 
 			char send_buffer[LENGTH+1]="\0";
 			for(i=0;i<strlen(ciphertext);){
@@ -224,28 +175,15 @@ int main(int argc, char *argv[])
 				memset(send_buffer, '\0', strlen(send_buffer));
 			}
 
-
-
-
-
-			//charsRead = send(establishedConnectionFD, ciphertext, strlen(ciphertext), 0); // Send success back
-			//if (charsRead < 0) error("ERROR writing to socket");
-
 			return 0;
-
-
-
-
 
 		}
 		else{
 			close(establishedConnectionFD);
 
-			//printf("pid:%d-----------------\n",pid);
 			while (pid > 0){ 	//parent process. wait for children to finish
-				//printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+
 				pid = waitpid(-1, &status, WNOHANG);
-				//printf(".");
 			}
 		}
 	}

@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-
+//generate key
 int main(int argc, char *argv[]){
 
     int keygen_len=0;
@@ -13,7 +13,6 @@ int main(int argc, char *argv[]){
         exit(1);
     }
     keygen_len=atoi(argv[1]);
-    //printf("%d\n",keygen_len);
 
     srand((unsigned)time(0));
 
@@ -33,6 +32,5 @@ int main(int argc, char *argv[]){
         strcat(key,temp_key);
     }
     key[keygen_len]='\0';
-    //key[keygen_len+1]='\0';
     printf("%s\n",key);
 }

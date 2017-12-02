@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 	if (serverHostInfo == NULL) { fprintf(stderr, "CLIENT: ERROR, no such host\n"); exit(0); }
 	memcpy((char*)&serverAddress.sin_addr.s_addr, (char*)serverHostInfo->h_addr, serverHostInfo->h_length);
 
-
+	//generate socket
 	socketFD = socket(AF_INET, SOCK_STREAM, 0);
 	if (socketFD < 0) {
 		perror("CLIENT: ERROR opening socket"); 
@@ -45,12 +45,11 @@ int main(int argc, char *argv[])
 
 	memset(buffer, '\0', sizeof(buffer));
 	
-
+	//hand shake
 	send(socketFD, auth_message, strlen(auth_message), 0);
-	//printf("****************\n");
+
 	recv(socketFD, buffer, 9999, 0);
-	//printf("****************2\n");
-    //printf("client:%s\n",buffer);
+
 	if (strcmp(buffer, "accept") != 0) {
         fprintf(stderr,"fial to contact otp_enc_d\n");
         exit(2);
@@ -60,29 +59,17 @@ int main(int argc, char *argv[])
 	FILE *plaintext_fp = fopen(argv[1], "r");
 	fgets(plaintext,80000,plaintext_fp);
 	plaintext[strlen(plaintext)]='\0';
-	//plaintext[strlen(plaintext)+1]='\0';
+
 	int i;
 	if(plaintext[0] == '$'){
 		fprintf(stderr,"bad characters \n");
 		exit(1);
 	}
-	// if(plaintext[0] < 'A' || plaintext[0] > 'Z'){
-	// 	if(plaintext[0] != ' '){
-	// 		fprintf(stderr,"bad characters \n");
-	// 		exit(1);
-	// 	}
-		
-	// }
-
 
 	char key[80000];
 	FILE *key_fp = fopen(argv[2], "r");
 	fgets(key,80000,key_fp);
 	key[strlen(key)]='\0';
-	//key[strlen(key)+1]='\0';
-
-	//printf("client:%s\n",plaintext);
-	//printf("client:%s\n",key);
 
 	if (strlen(plaintext) > (strlen(key))){
     	 fprintf(stderr, "key is too short\n"); 
@@ -90,8 +77,6 @@ int main(int argc, char *argv[])
     }
 
 	strcat(plaintext,key);
-	//printf("client:%s\n",plaintext);
-
 
 	char send_buffer[LENGTH+1]="\0";
 	for(i=0;i<strlen(plaintext);){
@@ -104,34 +89,13 @@ int main(int argc, char *argv[])
 		}
 		memset(send_buffer, '\0', strlen(send_buffer));
 	}
-
-
-
-
-
-
-
-
-	//send(socketFD, plaintext, strlen(plaintext), 0);
-	
-	//send(socketFD, key, strlen(key), 0);
-
-	//printf("============\n");
-
-
-
-
 	
 	memset(buffer, '\0', sizeof(buffer));
-
-
-
-
-
 
 	memset(buffer, '\0', 80000);
 	char receive_buffer[LENGTH+1]="\0";
 	int bytes_received = 0;
+	//revcive string
 	while ((bytes_received = recv(socketFD, receive_buffer, LENGTH, 0)) > 0){
 		strcat(buffer,receive_buffer);
 		memset(receive_buffer, '\0', strlen(receive_buffer));
@@ -142,18 +106,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
-
-
-
-
-
-
-	//charsRead = recv(socketFD, buffer, 9999, 0);
-
-	//if (charsRead < 0) error("ERROR reading from socket");
-
 	printf("%s\n",buffer);
-	//printf("client:%d\n",strlen(buffer));
 
 	close(socketFD);
 	return 0;
