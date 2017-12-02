@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
         exit(2);
     }
 
-	char plaintext[80000];
+	char plaintext[160000];
 	FILE *plaintext_fp = fopen(argv[1], "r");
 	fgets(plaintext,80000,plaintext_fp);
 	plaintext[strlen(plaintext)]='\0';
@@ -78,13 +78,13 @@ int main(int argc, char *argv[])
 	char key[80000];
 	FILE *key_fp = fopen(argv[2], "r");
 	fgets(key,80000,key_fp);
-	key[strlen(key)-1]='\0';
+	key[strlen(key)]='\0';
 	//key[strlen(key)+1]='\0';
 
 	//printf("client:%s\n",plaintext);
 	//printf("client:%s\n",key);
 
-	if (strlen(plaintext) > (strlen(key)+1)){
+	if (strlen(plaintext) > (strlen(key))){
     	 fprintf(stderr, "key is too short\n"); 
     	 exit(1);
     }
