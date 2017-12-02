@@ -179,8 +179,8 @@ int main(int argc, char *argv[])
 				}
 			}
 
-			printf("server plaintext:%d\n",strlen(plaintext));
-			printf("server key:%d\n",strlen(key));
+			//printf("server plaintext:%d\n",strlen(plaintext));
+			//printf("server key:%d\n",strlen(key));
 
 			
 			// int x = 0; 

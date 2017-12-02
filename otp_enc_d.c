@@ -187,8 +187,8 @@ int main(int argc, char *argv[])
 				}
 			}
 
-			printf("server plaintext:%d\n",strlen(plaintext));
-			printf("server key:%d\n",strlen(key));
+			//printf("server plaintext:%d\n",strlen(plaintext));
+			//printf("server key:%d\n",strlen(key));
 
 			
 			// int x = 0; 
@@ -228,12 +228,6 @@ int main(int argc, char *argv[])
 
 
 
-
-
-
-
-
-\
 			//charsRead = send(establishedConnectionFD, ciphertext, strlen(ciphertext), 0); // Send success back
 			//if (charsRead < 0) error("ERROR writing to socket");
 
