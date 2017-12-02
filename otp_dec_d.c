@@ -20,7 +20,7 @@ void enc(char plaintext[], char key[], char ciphertext_return[]){
     char temp_num_string[3],temp_ciphertext[3];
     for(i=0;i<strlen(plaintext);i++){
         if(plaintext[i]==' '){
-            plaintext_num=27;
+            plaintext_num=26;
         }
         else{
             sprintf(temp_num_string,"%d",plaintext[i]);
@@ -28,7 +28,7 @@ void enc(char plaintext[], char key[], char ciphertext_return[]){
         }
 
         if(key[i]==' '){
-            key_num=27;
+            key_num=26;
         }
         else{
             sprintf(temp_num_string,"%d",key[i]);
