@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
 	//plaintext[strlen(plaintext)+1]='\0';
 	int i;
 	for(i=0;i<strlen(plaintext);i++){
-		if(plaintext[0] < 'A' || plaintext[0] > 'Z'){
+		if(plaintext[0] < 'A' || plaintext[0] > 'Z' || plaintext[0] != ' '){
 			fprintf(stderr,"bad characters \n");
 			exit(1);
 		}
