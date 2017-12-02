@@ -62,13 +62,17 @@ int main(int argc, char *argv[])
 	plaintext[strlen(plaintext)]='\0';
 	//plaintext[strlen(plaintext)+1]='\0';
 	int i;
-	if(plaintext[0] < 'A' || plaintext[0] > 'Z'){
-		if(plaintext[0] != ' '){
-			fprintf(stderr,"bad characters \n");
-			exit(1);
-		}
-		
+	if(plaintext[0] == '$'){
+		fprintf(stderr,"bad characters \n");
+		exit(1);
 	}
+	// if(plaintext[0] < 'A' || plaintext[0] > 'Z'){
+	// 	if(plaintext[0] != ' '){
+	// 		fprintf(stderr,"bad characters \n");
+	// 		exit(1);
+	// 	}
+		
+	// }
 
 
 	char key[80000];
